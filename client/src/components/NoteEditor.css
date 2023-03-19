@@ -41,9 +41,9 @@
 }
 
 .note-editor .icons .material-symbols-outlined:hover {
-    background: #DDDDDD;
+    background: #333;
 }
 
 .note-editor .icons .material-symbols-outlined:active {
-    background: #DDDFFF;
+    background: rgb(66, 66, 66);
 }
