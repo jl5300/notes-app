@@ -1,3 +1,3 @@
-# notes-app
+# Message Board
 
-This is basically a simple CRUD app. I wrote it to gain experience with and understanding of the basics of fullstack web development.
+Simple CRUD app with posts in a global MongoDB database hosted on Microsoft Azure App Service.
