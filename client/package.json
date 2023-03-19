@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://joel-lozano.github.io/notes-app",
+  "homepage": "https://joel-lozano.github.io/message-board",
   "scripts": {
     "start": "vite",
     "predeploy": "npm run build",
