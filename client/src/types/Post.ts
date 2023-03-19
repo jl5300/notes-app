@@ -1,4 +1,4 @@
-export default interface Note {
+export default interface Post {
     title: string;
 	content: string;
 	_id?: string;

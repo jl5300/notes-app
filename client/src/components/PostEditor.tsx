@@ -1,34 +1,34 @@
 import React, { useEffect, useState, useRef } from 'react';
 import appConfig from '../config/app.config';
-import Note from '../types/Note';
-import './NoteEditor.css';
+import Post from '../types/Post';
+import './PostEditor.css';
 
-export default function NoteEditor(props: any) {
-    const focusedNote = props.note;
+export default function PostEditor(props: any) {
+    const focusedPost = props.post;
     const setStatus = props.setStatus;
-    const [state, setState] = useState<Note>(focusedNote);
+    const [state, setState] = useState<Post>(focusedPost);
 
     // Using a ref to avoid useEffect firing on initial render
-    // since state is already initialized to focusedNote
+    // since state is already initialized to focusedPost
     const initialRender = useRef<boolean>(true);
 
     useEffect(() => {
         if (initialRender.current) {
             initialRender.current = false;
         } else {
-            setState(focusedNote);
+            setState(focusedPost);
         }
-    }, [focusedNote]);
+    }, [focusedPost]);
 
     const handleSaveClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-        if (!focusedNote._id) {
+        if (!focusedPost._id) {
             return;
         }
         
-        setStatus('Saving note to database...');
+        setStatus('Saving post to database...');
 
         try {
-            const res = await fetch(`${appConfig.destination}/${focusedNote._id}`, {
+            const res = await fetch(`${appConfig.destination}/${focusedPost._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(state)
@@ -43,19 +43,19 @@ export default function NoteEditor(props: any) {
             return;
         }
     
-        props.updateNotes();
-        setStatus('Saved note successfully.');
+        props.updatePosts();
+        setStatus('Saved post successfully.');
     }
 
     const handleDeleteClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-        if (!focusedNote._id) {
+        if (!focusedPost._id) {
             return;
         }
 
-        setStatus('Deleting note from database...');
+        setStatus('Deleting post from database...');
 
         try {
-            const res = await fetch(`${appConfig.destination}/${focusedNote._id}`, {
+            const res = await fetch(`${appConfig.destination}/${focusedPost._id}`, {
                 method: 'DELETE'
             });
             const data = await res.json();
@@ -68,19 +68,19 @@ export default function NoteEditor(props: any) {
             return;
         }
     
-        props.updateNotes(true);
-        setStatus('Deleted note successfully.');
+        props.updatePosts(true);
+        setStatus('Deleted post successfully.');
     }
 
     return (
-        <section className="note-editor">
+        <section className="post-editor">
             <textarea
-                className="focused-note-title"
+                className="focused-post-title"
                 onChange={(event) => setState({ ...state, title: event.target.value })}
                 value={state.title}
             />
             <textarea
-                className="focused-note-content"
+                className="focused-post-content"
                 onChange={(event) => setState({ ...state, content: event.target.value })}
                 value={state.content}
             />

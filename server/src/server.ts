@@ -1,6 +1,6 @@
 import express from 'express';
 import dbConfig from '../config/database.config';
-import notesRouter from './routes/note.routes';
+import postsRouter from './routes/post.routes';
 import mongoose from 'mongoose';
 
 mongoose.set('strictQuery', false);
@@ -21,7 +21,7 @@ app.use(express.json());
 	}
 })();
 
-app.use('/notes', notesRouter);
+app.use('/posts', postsRouter);
 
 app.listen(PORT, () => {
 	console.log(`Server is listening on port ${PORT}.`);

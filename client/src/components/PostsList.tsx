@@ -1,40 +1,40 @@
 import parseTimestamp from '../utils/parseTimestamp';
-import NewNoteButton from './NewNoteButton';
+import NewPostButton from './NewPostButton';
 import StatusDisplay from './StatusDisplay';
 import { useState } from 'react';
-import Note from '../types/Note';
-import './NotesList.css'
+import Post from '../types/Post';
+import './PostsList.css'
 
-export default function NotesList(props: any) {
-    const setFocusedNote = props.setFocusedNote;
+export default function PostsList(props: any) {
+    const setFocusedPost = props.setFocusedPost;
     const [ focusedIndex, setFocusedIndex ] = useState<number>(0);
     
-    const notesList: Array<JSX.Element> = props.notes.map((note: Note, index: number) => {
+    const postsList: Array<JSX.Element> = props.posts.map((post: Post, index: number) => {
         const handleClick = () => {
-            setFocusedNote(note);    
+            setFocusedPost(post);    
             setFocusedIndex(index);
         };
 
-        const { date, time } = parseTimestamp(note.updatedAt);
+        const { date, time } = parseTimestamp(post.updatedAt);
         let background = undefined;
        
         if (index === focusedIndex) {
-           background = 'var(--current-note-active-bg)';
+           background = 'var(--current-post-active-bg)';
         }
 
 		return (
 			<li
-                key={note._id}
-                className="notes"
+                key={post._id}
+                className="posts"
                 style={{ background: background }}
                 onClick={handleClick}
             >
                 <span className="previews">
                     <div className="title-preview">
-                        {note.title}
+                        {post.title}
                     </div>
                     <div className="content-preview">
-                        {note.content}
+                        {post.content}
                     </div>
                 </span>
                 <span className="timestamps">
@@ -53,18 +53,18 @@ export default function NotesList(props: any) {
         <section className="right-column">
             <div className="list-header">
                 <StatusDisplay
-                    notes={props.notes}
+                    posts={props.posts}
                     status={props.status}
-                    setNotes={props.setNotes}
+                    setPosts={props.setPosts}
                 />
-                <NewNoteButton
+                <NewPostButton
                     setStatus={props.setStatus}
-                    updateNotes={props.updateNotes}
-                    setFocusedNote={setFocusedNote}
+                    updatePosts={props.updatePosts}
+                    setFocusedPost={setFocusedPost}
                 />
             </div>
-            <ul className="notes-list">
-                {notesList}
+            <ul className="posts-list">
+                {postsList}
             </ul>
         </section>
     );

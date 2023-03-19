@@ -1,15 +1,15 @@
 import mongoose from 'mongoose';
 
-interface INote {
+interface IPost {
 	title: string;
 	content: string;
 }
 
-const NoteSchema = new mongoose.Schema<INote>({
+const PostSchema = new mongoose.Schema<IPost>({
 	title: String,
 	content: String,
 }, {
 	timestamps: true,
 });
 
-export default mongoose.model<INote>('Note', NoteSchema);
+export default mongoose.model<IPost>('Post', PostSchema);

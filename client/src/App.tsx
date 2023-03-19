@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
-import NoteEditor from './components/NoteEditor';
-import NotesList from './components/NotesList';
+import PostEditor from './components/PostEditor';
+import PostsList from './components/PostsList';
 import appConfig from './config/app.config';
-import Note from './types/Note';
+import Post from './types/Post';
 import './App.css';
 
-const defaultNote: Note = {
-	title: 'No notes',
+const defaultPost: Post = {
+	title: 'No posts',
 	content: 'Create one to get started.'
 };
 
 function App() {
-	const [notes, setNotes] = useState<Array<Note>>([]);
+	const [posts, setPosts] = useState<Array<Post>>([]);
 	const [status, setStatus] = useState<string>('');
-	const [focusedNote, setFocusedNote] = useState<Note>(defaultNote);
+	const [focusedPost, setFocusedPost] = useState<Post>(defaultPost);
 
-	const updateNotes = async (focusFirstNote=false, updateStatus=false) => {
-		setStatus('Getting notes from database...');
+	const updatePosts = async (focusFirstPost=false, updateStatus=false) => {
+		setStatus('Getting posts from database...');
 	
 		try {
-			const res = await fetch(appConfig.destination);
+			const res = await fetch(appConfig.dbServer);
 			const data = await res.json();
 			
 			if (!res.ok) {
@@ -27,10 +27,10 @@ function App() {
 				throw new Error(data.message);
 			}
 			
-			setNotes(data);
+			setPosts(data);
 
-			if (focusFirstNote) {
-				setFocusedNote(data.length ? data[0] : defaultNote);
+			if (focusFirstPost) {
+				setFocusedPost(data.length ? data[0] : defaultPost);
 			}
 		} catch (err: any) {
 			setStatus(err.message);
@@ -38,35 +38,35 @@ function App() {
 		}
 
 		if (updateStatus) {
-			setStatus('Updated notes successfully.');
+			setStatus('Updated posts successfully.');
 		}
 	}
 	
 	// Set up initial display on page load
 	useEffect(() => {
-		updateNotes(true, true);
+		updatePosts(true, true);
 	}, []);
 
 	return (
 		<div className="App">
 			<main>
-				<NoteEditor
-					note={focusedNote}
+				<PostEditor
+					post={focusedPost}
 					setStatus={setStatus}
-					updateNotes={updateNotes}
+					updatePosts={updatePosts}
 				/>
-				<NotesList
-					notes={notes}
+				<PostsList
+					posts={posts}
 					status={status}
-					setNotes={setNotes}
+					setPosts={setPosts}
 					setStatus={setStatus}
-					updateNotes={updateNotes}
-					focusedNote={focusedNote}
-					setFocusedNote={setFocusedNote}
+					updatePosts={updatePosts}
+					focusedPost={focusedPost}
+					setFocusedPost={setFocusedPost}
 				/>
 			</main>
 			<div className="credits">
-				<a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/3mZCmvlo0TiW/note">
+				<a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/3mZCmvlo0TiW/post">
                     Note
                 </a> icon by <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">
                     Icons8

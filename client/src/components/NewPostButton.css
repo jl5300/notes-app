@@ -1,4 +1,4 @@
-.new-note-button {
+.new-post-button {
     display: flex;
     align-items: center;
     gap: 0.7rem;
@@ -7,15 +7,15 @@
     cursor: pointer;
 }
 
-.new-note-button:hover {
-    background: var(--current-note-hovered-bg);
+.new-post-button:hover {
+    background: var(--current-post-hovered-bg);
 }
 
-.new-note-button:active {
-    background: var(--current-note-active-bg);
+.new-post-button:active {
+    background: var(--current-post-active-bg);
 }
 
-.new-note-button .material-symbols-outlined {
+.new-post-button .material-symbols-outlined {
     font-size: 2rem;
     margin: 0.4rem 0rem;
 }

@@ -1,12 +1,12 @@
 import appConfig from '../config/app.config';
-import './NewNoteButton.css';
+import './NewPostButton.css';
 import React from 'react';
 
-export default function NewNoteButton(props: any) {
+export default function NewPostButton(props: any) {
     const setStatus = props.setStatus;
 
     const handleClick = async (event: React.MouseEvent<HTMLDivElement>) => {
-        setStatus('Creating new note in database...');
+        setStatus('Creating new post in database...');
 
         try {
             const res = await(fetch(appConfig.destination, { method: 'POST' }));
@@ -16,26 +16,26 @@ export default function NewNoteButton(props: any) {
                 throw new Error(data.message);
             }
 
-            props.setFocusedNote(data);
+            props.setFocusedPost(data);
         } catch (err: any) {
             setStatus(err.message);
             return;
         }
     
-        props.updateNotes();
-        setStatus('Created note successfully.');
+        props.updatePosts();
+        setStatus('Created post successfully.');
     }
 
     return (
         <div
-            className="new-note-button"
+            className="new-post-button"
             onClick={handleClick}
         >
             <span className="material-symbols-outlined">
-                note_add
+                post_add
             </span>
             <span>
-                Create new note
+                Create new post
             </span>
         </div>
     );

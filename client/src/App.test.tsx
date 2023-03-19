@@ -3,7 +3,7 @@ import noteActions from './__mocks__/noteActions.json';
 import getExisting from './__mocks__/getExisting.json';
 import userEvent from '@testing-library/user-event';
 import fetchMock from 'jest-fetch-mock';
-import Note from './types/Note';
+import Note from './types/Post';
 import App from './App';
 
 /*

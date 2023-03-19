@@ -1,9 +1,9 @@
-.note-editor {
+.post-editor {
     flex: 1;
     position: relative;
 }
 
-.note-editor textarea {
+.post-editor textarea {
     color: var(--current-fg);
     background: none;
     border: none;
@@ -15,17 +15,17 @@
     overflow: auto;
 }
 
-.note-editor .focused-note-title {
+.post-editor .focused-post-title {
     border-bottom: 1px solid var(--current-border);  
     font-size: 2rem;
     height: 25%;
 }
 
-.note-editor .focused-note-content {
+.post-editor .focused-post-content {
     height: 61%;
 }
 
-.note-editor .icons {
+.post-editor .icons {
     margin: 0rem 1rem 1rem 0rem;
     position: absolute;
     bottom: 0rem;
@@ -34,16 +34,16 @@
     gap: 0.5rem;
 }
 
-.note-editor .icons .material-symbols-outlined {
+.post-editor .icons .material-symbols-outlined {
     cursor: pointer;
     font-size: 3.5rem;
     border-radius: 25%;
 }
 
-.note-editor .icons .material-symbols-outlined:hover {
+.post-editor .icons .material-symbols-outlined:hover {
     background: #333;
 }
 
-.note-editor .icons .material-symbols-outlined:active {
+.post-editor .icons .material-symbols-outlined:active {
     background: rgb(66, 66, 66);
 }

@@ -1,17 +1,17 @@
-/* Add note focused variables and manipulate from react */
+/* Add post focused variables and manipulate from react */
 
 :root {
     /* Light mode */
-    --light-note-hovered-bg: #d6d6d6;
-    --light-note-active-bg: #c1c1c1;
+    --light-post-hovered-bg: #d6d6d6;
+    --light-post-active-bg: #c1c1c1;
 
     /* Dark mode */
-    --dark-note-hovered-bg: #363636; 
-    --dark-note-active-bg: #2f2f2f;
+    --dark-post-hovered-bg: #363636; 
+    --dark-post-active-bg: #2f2f2f;
     
     /* Defaults */
-    --current-note-hovered-bg: var(--dark-note-hovered-bg);
-    --current-note-active-bg: var(--dark-note-active-bg);
+    --current-post-hovered-bg: var(--dark-post-hovered-bg);
+    --current-post-active-bg: var(--dark-post-active-bg);
 }
 
 .right-column {
@@ -25,12 +25,12 @@
     top: 0;
 }
 
-.notes-list {
+.posts-list {
     padding: 0;
     margin: 0;
 }
 
-.notes {
+.posts {
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -39,34 +39,34 @@
     cursor: pointer;
 }
 
-.notes:hover {
-    background: var(--current-note-hovered-bg);
+.posts:hover {
+    background: var(--current-post-hovered-bg);
 }
 
-.notes:active {
-    background: var(--current-note-active-bg);
+.posts:active {
+    background: var(--current-post-active-bg);
 }
 
-.notes .previews {
+.posts .previews {
     width: 83%;
 }
 
-.notes .previews div {
+.posts .previews div {
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
 }
 
-.notes .title-preview {
+.posts .title-preview {
     margin-bottom: 0.5rem;
 }
 
-.notes .content-preview {
+.posts .content-preview {
     font-style: italic;
     color: gray;
 }
 
-.notes .timestamps {
+.posts .timestamps {
     flex: 1;
     color: gray;
     text-align: right;
@@ -75,7 +75,7 @@
 
 @media (prefers-color-scheme: light) {
     :root {
-        --current-note-hovered-bg: var(--light-note-hovered-bg);
-        --current-note-active-bg: var(--light-note-active-bg);
+        --current-post-hovered-bg: var(--light-post-hovered-bg);
+        --current-post-active-bg: var(--light-post-active-bg);
     }
 }
