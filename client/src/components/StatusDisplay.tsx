@@ -10,7 +10,7 @@ export default function StatusDisplay(props: any) {
                 </div>
             </span>
             <span className="sort-container">
-                <SortDropdown notes={props.notes} setNotes={props.setNotes} />
+                <SortDropdown posts={props.posts} setPosts={props.setPosts} />
             </span>
         </div>
     );

@@ -40,7 +40,7 @@ export default function SortDropdown(props: any) {
             setButtonText(property);
         }
 
-        props.setNotes(props.notes.slice().sort((a: any, b: any) => {
+        props.setPosts(props.posts.slice().sort((a: any, b: any) => {
             if (a[criteria] === b[criteria]) {
                 return 0;
             }
