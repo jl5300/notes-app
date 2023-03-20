@@ -1,13 +1,14 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Simple notes app for practice with RESTful APIs.",
+  "description": "CRUD app for practice with RESTful APIs.",
   "main": "server.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
+    "start": "npm run dev",
+    "dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "tsc": "tsc",
     "postinstall": "npm run tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "exit 0"
   },
   "keywords": [
     "Express",
@@ -21,7 +22,6 @@
     "mongoose": "^6.8.4"
   },
   "devDependencies": {
-    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.15",
     "@types/jest": "^29.2.4",
     "@types/node": "^18.11.17",
