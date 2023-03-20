@@ -14,7 +14,6 @@ app.use(express.json());
 (async () => {
 	try {
 		await mongoose.connect(dbConfig.url);
-		console.log('Connected to database successfully.');
 	} catch (err: any) {
 		console.error(err.message || "Error connecting to database.");
 		process.exit();

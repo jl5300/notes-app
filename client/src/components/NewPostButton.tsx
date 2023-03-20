@@ -9,7 +9,7 @@ export default function NewPostButton(props: any) {
         setStatus('Creating new post in database...');
 
         try {
-            const res = await(fetch(appConfig.destination, { method: 'POST' }));
+            const res = await(fetch(appConfig.dbServer, { method: 'POST' }));
             const data = await res.json();
 
             if (!res.ok) {

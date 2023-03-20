@@ -7,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/notes': 'http://localhost:3000'
+      '/posts': 'http://localhost:3000'
     },
   },
 });
