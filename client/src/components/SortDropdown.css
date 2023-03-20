@@ -1,11 +1,17 @@
 :root {
     --light-sort-button-bg: #7FDBFF;
+    --light-sort-option-hovered-bg: #DDDFFF;
+    
     --dark-sort-button-bg: #143d67;
+    --dark-sort-option-hovered-bg: #363636;
+
     --current-sort-button-bg: var(--dark-sort-button-bg);
+    --current-sort-option-hovered-bg: var(--dark-sort-option-hovered-bg);
 }
 
 .dropdown {
     position: relative;
+    cursor: pointer;
 }
 
 .dropdown #sort-button {
@@ -19,6 +25,7 @@
     min-width: 5.7rem;
     margin-top: 0.2rem;
     outline: none;
+    cursor: pointer;
 }
 
 .dropdown #sort-button .label {
@@ -36,21 +43,21 @@
     padding: 0;
     position: absolute;
     list-style-type: none;
-    border: 1px solid var(--current-fg);
+    border: 1px solid gray;
     background-color: var(--current-bg);
 }
 
 .menu li {
     padding: 1rem;
-    cursor: pointer;
 }
 
 .menu li:hover {
-    background-color: #DDDFFF;
+    background-color: var(--current-sort-option-hovered-bg);
 }
 
 @media (prefers-color-scheme: light) {
     :root {
         --current-sort-button-bg: var(--light-sort-button-bg);
+        --current-sort-option-hovered-bg: var(--light-sort-option-hovered-bg);
     }
 }
