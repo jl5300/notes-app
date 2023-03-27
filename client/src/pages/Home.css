@@ -1,0 +1,48 @@
+main {
+    display: flex;
+    height: 80vh;
+    gap: 12rem;
+    padding: 3.5rem 12rem 2.5rem 12rem;
+}
+
+section {
+    border: 1px solid var(--dark-border);
+}
+
+.credits {
+    font-size: 0.8rem;
+    padding: 0 0.2rem;
+}
+
+header {
+    text-align: right;
+    padding: 0.2rem;
+}
+
+a {
+    color: #aaa;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --current-bg: var(--light-bg);
+        --current-fg: var(--light-fg);
+        --current-border: var(--light-border);
+    }
+
+    a {
+        color: #7FDBFF; 
+    }
+}
+
+@media (width < 1000px) {
+    main {
+        height: 93vh;
+        padding: 0.2rem 0;
+        gap: 0;
+    }
+    
+    .site-header {
+        padding: 0 0.2rem;
+    }
+}

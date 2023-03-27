@@ -20,44 +20,6 @@ body {
     user-select: none;
     background-color: var(--current-bg);
     color: var(--current-fg);
-}
-
-main {
-    display: flex;
-    height: 82vh;
-    gap: 12rem;
-    padding: 3.5rem 12rem 2.5rem 12rem;
-}
-
-section {
-    border: 1px solid var(--dark-border);
-}
-
-.credits {
-    font-size: 0.8rem;
-}
-
-a {
-    color: #aaa;
-}
-
-@media (prefers-color-scheme: light) {
-    :root {
-        --current-bg: var(--light-bg);
-        --current-fg: var(--light-fg);
-        --current-border: var(--light-border);
-    }
-
-    a {
-        color: #7FDBFF; 
-    }
-}
-
-@media (width < 1000px) {
-    main {
-        height: 95vh;
-        padding: 0;
-        padding-bottom: 0.2rem;
-        gap: 0;
-    }
+    height: 100vh;
+    margin: 0;
 }

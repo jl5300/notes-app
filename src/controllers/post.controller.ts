@@ -1,5 +1,5 @@
-import Post from '../models/post.model';
 import { Request, Response } from 'express';
+import Post from '../models/post.model';
 
 // Helper function to eliminate string literal repetition
 function postNotFoundMessage(id: string): string {
