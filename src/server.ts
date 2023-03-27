@@ -1,6 +1,7 @@
 // Third party dependencies
 import MongoStore from 'connect-mongo';
 import sessions from 'express-session';
+import flash from 'express-flash';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import express from 'express';
@@ -9,6 +10,7 @@ import path from 'path';
 // Local dependencies
 import dbConfig from '../config/database.config';
 import postsRouter from './routes/post.routes';
+import userRouter from './routes/user.routes';
 import User from './models/user.model';
 
 // Avoid deprecation
@@ -38,6 +40,7 @@ app.use(sessions({
     saveUninitialized: true,
     resave: false
 }));
+app.use(flash());
 
 // Authentication
 app.use(passport.session());
@@ -45,15 +48,12 @@ passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-// Other middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Routes
-app.post('/login', passport.authenticate('local'), (req, res) => {
-    console.log(req);
-    res.redirect('/');
-});
+// TODO: Learn about flash messages
+app.use('/posts', postsRouter);
+app.use('/', userRouter);
 
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
@@ -62,7 +62,6 @@ app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
-app.use('/posts', postsRouter);
 
 app.listen(PORT, () => {
 	console.log(`Server is listening on port ${PORT}.`);
