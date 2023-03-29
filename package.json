@@ -4,7 +4,7 @@
   "description": "CRUD app for practice with RESTful APIs.",
   "main": "server.js",
   "scripts": {
-    "start": "npm run dev",
+    "start": "node dist/src/server.js",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "tsc": "tsc",
     "postinstall": "npm run tsc",
