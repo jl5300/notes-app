@@ -37,7 +37,7 @@ app.use(sessions({
     }),
     secret: '8t7ablgdg6',
     cookie: { maxAge: 1000 * 60 * 60 * 24 },
-    saveUninitialized: true,
+    saveUninitialized: false,
     resave: false
 }));
 app.use(flash());
@@ -61,7 +61,6 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.use((req, res, next) => {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
-
 
 app.listen(PORT, () => {
 	console.log(`Server is listening on port ${PORT}.`);
