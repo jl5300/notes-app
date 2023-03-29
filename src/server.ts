@@ -1,7 +1,7 @@
 // Third party dependencies
 import MongoStore from 'connect-mongo';
 import sessions from 'express-session';
-import flash from 'express-flash';
+// import flash from 'express-flash';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import express from 'express';
@@ -40,7 +40,7 @@ app.use(sessions({
     saveUninitialized: false,
     resave: false
 }));
-app.use(flash());
+// app.use(flash());
 
 // Authentication
 app.use(passport.session());
