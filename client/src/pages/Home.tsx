@@ -41,16 +41,41 @@ export default function Home() {
 			setStatus('Updated posts successfully.');
 		}
 	}
+
+    let headerContent = <a className='login-link' href='/login'>Log In</a>;
+
+    const fetchUser = async () => {
+        try {
+            const res = await fetch('https://jlz-posts-api.azurewebsites.net/currentuser');
+            const data = await res.json();
+
+            if (!res.ok) {
+				console.log(res);
+				throw new Error(data.message);
+			}
+
+            headerContent = <div>{data}</div>;
+        }
+
+        catch (err: any) {
+            setStatus(err.message);
+        }
+    }
 	
 	// Set up initial display on page load
 	useEffect(() => {
 		updatePosts(true, true);
 	}, []);
 
+    // Get current user from server if logged in
+    useEffect(() => {
+        fetchUser();
+    });
+
 	return (
 		<div className="App">
             <header>
-                <a className='login-link' href='/login'>Log In</a>
+                {headerContent}
             </header>
 			<main>
 				<PostEditor

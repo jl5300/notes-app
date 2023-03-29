@@ -18,4 +18,8 @@ router.post('/register', async (req, res, next) => {
     res.redirect('/');
 });
 
+router.get('/currentuser', (req, res) => {
+    res.send(req.user);
+});
+
 export default router;
