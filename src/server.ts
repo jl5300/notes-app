@@ -9,9 +9,9 @@ import express from 'express';
 import path from 'path';
 
 // Local dependencies
-import dbConfig from '../config/database.config';
 import postsRouter from './routes/post.routes';
 import userRouter from './routes/user.routes';
+import config from '../config/server.config';
 import User from './models/user.model';
 
 // Avoid deprecation
@@ -22,7 +22,7 @@ const app = express();
 
 (async () => {
 	try {
-		await mongoose.connect(dbConfig.url);
+		await mongoose.connect(config.db);
         console.log('Connected to database successfully.')
 	} catch (err: any) {
 		console.error(err.message || 'Error connecting to database.');
@@ -32,12 +32,12 @@ const app = express();
 
 app.use(sessions({
     store: MongoStore.create({
-        mongoUrl: dbConfig.url,
+        mongoUrl: config.db,
         ttl: 14 * 24 * 60 * 60,
         autoRemove: 'native'
     }),
     // TODO: Generate a secret string and store it in Microsoft Azure
-    secret: 'developmentsecret',
+    secret: config.sessionSecret,
     cookie: { maxAge: 1000 * 60 * 60 * 24 },
     saveUninitialized: false,
     resave: false
