@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PostEditor from '../components/PostEditor';
 import PostsList from '../components/PostsList';
-import appConfig from '../config/app.config';
+import { db } from '../config/app.config';
 import Post from '../types/Post';
 import './Home.css';
 
@@ -13,17 +13,17 @@ const defaultPost: Post = {
 export default function Home() {
     const [posts, setPosts] = useState<Array<Post>>([]);
 	const [status, setStatus] = useState<string>('');
+    const [user, setUser] = useState<string | null>(null);
 	const [focusedPost, setFocusedPost] = useState<Post>(defaultPost);
 
 	const updatePosts = async (focusFirstPost=false, updateStatus=false) => {
-		setStatus('Getting posts from database...');
+		setStatus('Getting posts from userbase...');
 	
 		try {
-			const res = await fetch(appConfig.dbUrl);
+			const res = await fetch(db.posts);
 			const data = await res.json();
 			
 			if (!res.ok) {
-				console.log(res);
 				throw new Error(data.message);
 			}
 			
@@ -42,40 +42,42 @@ export default function Home() {
 		}
 	}
 
-    let headerContent = <a className='login-link' href='/login'>Log In</a>;
-
     const fetchUser = async () => {
         try {
-            const res = await fetch('https://jlz-posts-api.azurewebsites.net/currentuser');
-            const data = await res.json();
+            const res = await fetch(db.user);
+            const currentUser = await res.json();
 
             if (!res.ok) {
-				console.log(res);
-				throw new Error(data.message);
+				throw new Error(currentUser.message);
 			}
 
-            headerContent = <div>{data}</div>;
+            // Status if no user logged in is 204, so it won't
+            // be caught by the above conditional
+            if (res.status == 200) {
+                setUser(currentUser.username);
+            }
         }
-
         catch (err: any) {
-            setStatus(err.message);
+            console.log(err.message);
         }
     }
 	
 	// Set up initial display on page load
 	useEffect(() => {
 		updatePosts(true, true);
+        fetchUser();
 	}, []);
 
-    // Get current user from server if logged in
-    useEffect(() => {
-        fetchUser();
-    });
-
 	return (
-		<div className="App">
+		<div>
             <header>
-                {headerContent}
+                <div className='welcome-message'>
+                    {
+                        user ?
+                        <p>Welcome {user}! <a href='/logout' onClick={() => setUser(null)}>Log Out</a></p> :
+                        <a className='login-link' href='/login'>Log In</a>
+                    }
+                </div>
             </header>
 			<main>
 				<PostEditor

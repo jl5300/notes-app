@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import appConfig from '../config/app.config';
+import { db } from '../config/app.config';
 import Post from '../types/Post';
 import './PostEditor.css';
 
@@ -28,7 +28,7 @@ export default function PostEditor(props: any) {
         setStatus('Saving post to database...');
 
         try {
-            const res = await fetch(`${appConfig.dbUrl}/${focusedPost._id}`, {
+            const res = await fetch(`${db.posts}/${focusedPost._id}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(state)
@@ -55,7 +55,7 @@ export default function PostEditor(props: any) {
         setStatus('Deleting post from database...');
 
         try {
-            const res = await fetch(`${appConfig.dbUrl}/${focusedPost._id}`, {
+            const res = await fetch(`${db.posts}/${focusedPost._id}`, {
                 method: 'DELETE'
             });
             const data = await res.json();

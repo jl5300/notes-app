@@ -1,4 +1,4 @@
-import appConfig from '../config/app.config';
+import { db } from '../config/app.config';
 import './NewPostButton.css';
 import React from 'react';
 
@@ -9,7 +9,7 @@ export default function NewPostButton(props: any) {
         setStatus('Creating new post in database...');
 
         try {
-            const res = await(fetch(appConfig.dbUrl, { method: 'POST' }));
+            const res = await(fetch(db.posts, { method: 'POST' }));
             const data = await res.json();
 
             if (!res.ok) {
@@ -21,7 +21,7 @@ export default function NewPostButton(props: any) {
             setStatus(err.message);
             return;
         }
-    
+
         props.updatePosts();
         setStatus('Created post successfully.');
     }

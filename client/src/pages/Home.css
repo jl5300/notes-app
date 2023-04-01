@@ -1,12 +1,16 @@
 main {
     display: flex;
-    height: 80vh;
+    height: 82vh;
     gap: 12rem;
-    padding: 3.5rem 12rem 2.5rem 12rem;
+    padding: 0 12rem 2.5rem 12rem;
 }
 
 section {
     border: 1px solid var(--dark-border);
+}
+
+.welcome-message {
+    padding: 0rem 1rem;
 }
 
 .credits {
@@ -15,8 +19,10 @@ section {
 }
 
 header {
-    text-align: right;
-    padding: 0.2rem;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    height: 10vh;
 }
 
 a {
@@ -37,9 +43,13 @@ a {
 
 @media (width < 1000px) {
     main {
-        height: 93vh;
+        height: 88vh;
         padding: 0.2rem 0;
         gap: 0;
+    }
+    
+    header {
+        height: 8vh;
     }
     
     .site-header {

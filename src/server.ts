@@ -1,4 +1,5 @@
 // Third party dependencies
+import cookieParser from 'cookie-parser';
 import MongoStore from 'connect-mongo';
 import sessions from 'express-session';
 // import flash from 'express-flash';
@@ -35,11 +36,13 @@ app.use(sessions({
         ttl: 14 * 24 * 60 * 60,
         autoRemove: 'native'
     }),
-    secret: '8t7ablgdg6',
+    // TODO: Generate a secret string and store it in Microsoft Azure
+    secret: 'developmentsecret',
     cookie: { maxAge: 1000 * 60 * 60 * 24 },
     saveUninitialized: false,
     resave: false
 }));
+app.use(cookieParser());
 // app.use(flash());
 
 // Authentication
@@ -55,11 +58,22 @@ app.use(express.json());
 app.use('/posts', postsRouter);
 app.use('/', userRouter);
 
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// Path to client build depends on whether server is running
+//  from src or from dist/src folder. process.env.NODE_ENV is
+//  undefined, so check the file extension instead:
+//      ts - development
+//      js - production (compiled Typescript)
+let clientBuildPath = '../client/dist/';
+
+if (__filename.split('.').pop() === 'js') {
+    clientBuildPath = '../' + clientBuildPath;
+}
+
+app.use(express.static(path.join(__dirname, clientBuildPath)));
 
 // For requests to unrecognized routes, defer to React app
-app.use((req, res, next) => {
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+app.use((req, res) => {
+    res.sendFile(path.join(__dirname, clientBuildPath, 'index.html'));
 });
 
 app.listen(PORT, () => {
