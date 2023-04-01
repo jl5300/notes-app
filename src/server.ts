@@ -1,5 +1,5 @@
 // Third party dependencies
-import cookieParser from 'cookie-parser';
+// import cookieParser from 'cookie-parser';
 import MongoStore from 'connect-mongo';
 import sessions from 'express-session';
 // import flash from 'express-flash';
@@ -36,13 +36,12 @@ app.use(sessions({
         ttl: 14 * 24 * 60 * 60,
         autoRemove: 'native'
     }),
-    // TODO: Generate a secret string and store it in Microsoft Azure
     secret: config.sessionSecret,
     cookie: { maxAge: 1000 * 60 * 60 * 24 },
     saveUninitialized: false,
     resave: false
 }));
-app.use(cookieParser());
+// app.use(cookieParser());
 // app.use(flash());
 
 // Authentication
@@ -55,8 +54,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // TODO: Learn about flash messages
-app.use('/posts', postsRouter);
 app.use('/', userRouter);
+app.use('/posts', postsRouter);
 
 // Path to client build depends on whether server is running
 //  from src or from dist/src folder. process.env.NODE_ENV is

@@ -27,11 +27,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/user', (req, res) => {
-    if (req.user) {
-        return res.send(req.user);
-    }
-
-    return res.status(204);
+    res.send(req.user);
 });
 
 export default router;
