@@ -64,9 +64,9 @@ app.use('/posts', postsRouter);
 //      js - production (compiled Typescript)
 let clientBuildPath = '../client/dist/';
 
-if (__filename.split('.').pop() === 'js') {
-    clientBuildPath = '../' + clientBuildPath;
-}
+// if (__filename.split('.').pop() === 'js') {
+//     clientBuildPath = '../' + clientBuildPath;
+// }
 
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 
