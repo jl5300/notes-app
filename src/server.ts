@@ -62,11 +62,11 @@ app.use('/posts', postsRouter);
 //  undefined, so check the file extension instead:
 //      ts - development
 //      js - production (compiled Typescript)
-let clientBuildPath = '../client/dist/';
+let clientBuildPath = '../../client/dist/';
 
-if (__filename.split('.').pop() === 'js') {
-    clientBuildPath = '../' + clientBuildPath;
-}
+// if (__filename.split('.').pop() === 'js') {
+//     clientBuildPath = '../' + clientBuildPath;
+// }
 
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 
