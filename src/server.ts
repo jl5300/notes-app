@@ -11,7 +11,7 @@ import path from 'path';
 // Local dependencies
 import postsRouter from './routes/post.routes';
 import userRouter from './routes/user.routes';
-import config from '../config/server.config';
+import config from './config/server.config';
 import User from './models/user.model';
 
 // Avoid deprecation
@@ -64,9 +64,9 @@ app.use('/posts', postsRouter);
 //      js - production (compiled Typescript)
 let clientBuildPath = '../client/dist/';
 
-// if (__filename.split('.').pop() === 'js') {
-//     clientBuildPath = '../' + clientBuildPath;
-// }
+if (__filename.split('.').pop() === 'js') {
+    clientBuildPath = '../' + clientBuildPath;
+}
 
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 
