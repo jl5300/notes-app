@@ -33,7 +33,7 @@ const app = express();
 app.use(sessions({
     store: MongoStore.create({
         mongoUrl: config.db,
-        ttl: 14 * 24 * 60 * 60,
+        // ttl: 14 * 24 * 60 * 60,
         autoRemove: 'native'
     }),
     secret: config.sessionSecret,
