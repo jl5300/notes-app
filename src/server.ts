@@ -1,5 +1,4 @@
 // Third party dependencies
-// import cookieParser from 'cookie-parser';
 import MongoStore from 'connect-mongo';
 import sessions from 'express-session';
 // import flash from 'express-flash';
@@ -33,7 +32,7 @@ const app = express();
 app.use(sessions({
     store: MongoStore.create({
         mongoUrl: config.db,
-        // ttl: 14 * 24 * 60 * 60,
+        ttl: 14 * 24 * 60 * 60,
         autoRemove: 'native'
     }),
     secret: config.sessionSecret,
@@ -41,7 +40,6 @@ app.use(sessions({
     saveUninitialized: false,
     resave: false
 }));
-// app.use(cookieParser());
 // app.use(flash());
 
 // Authentication
@@ -62,11 +60,11 @@ app.use('/posts', postsRouter);
 //  undefined, so check the file extension instead:
 //      ts - development
 //      js - production (compiled Typescript)
-let clientBuildPath = '../../client/dist/';
+let clientBuildPath = '../client/dist/';
 
-// if (__filename.split('.').pop() === 'js') {
-//     clientBuildPath = '../' + clientBuildPath;
-// }
+if (__filename.split('.').pop() === 'js' || process.env.NODE_ENV === 'production') {
+    clientBuildPath = '../' + clientBuildPath;
+}
 
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 
