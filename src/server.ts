@@ -36,7 +36,7 @@ app.use(sessions({
         autoRemove: 'native'
     }),
     secret: config.sessionSecret,
-    cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    // cookie: { maxAge: 1000 * 60 * 60 * 24 },
     saveUninitialized: false,
     resave: false
 }));
