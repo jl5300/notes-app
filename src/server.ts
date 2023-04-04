@@ -32,11 +32,12 @@ const app = express();
 app.use(sessions({
     store: MongoStore.create({
         mongoUrl: config.db,
-        // ttl: 14 * 24 * 60 * 60,
-        autoRemove: 'native'
+        ttl:24 * 60 * 60 * 1000,
+        autoRemove: 'interval',
+        autoRemoveInterval: 10
     }),
     secret: config.sessionSecret,
-    // cookie: { maxAge: 1000 * 60 * 60 * 24 },
+    cookie: { maxAge: 1000 * 60 * 60 * 24 },
     saveUninitialized: false,
     resave: false
 }));
