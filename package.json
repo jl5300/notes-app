@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "CRUD app for practice with RESTful APIs.",
+  "description": "Message board app backend.",
   "main": "server.js",
   "scripts": {
     "start": "node dist/src/server.js",
@@ -13,7 +13,7 @@
   "keywords": [
     "Express",
     "RestAPI",
-    "Notes"
+    "Posts"
   ],
   "author": "Joel Lozano",
   "license": "ISC",
