@@ -4,7 +4,7 @@
   "description": "Message board app backend.",
   "main": "server.js",
   "scripts": {
-    "start": "node dist/src/server.js",
+    "start": "pm2 start dist/src/server.js --no-daemon",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "tsc": "tsc",
     "postinstall": "npm run tsc",
