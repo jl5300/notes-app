@@ -7,7 +7,7 @@
     "start": "node dist/server.js",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
     "tsc": "tsc",
-    "build": "npm run tsc",
+    "build": "cd client && npm run build",
     "postinstall": "npm run tsc",
     "test": "exit 0"
   },
