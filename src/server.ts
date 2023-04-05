@@ -56,16 +56,7 @@ app.use(express.json());
 app.use('/', userRouter);
 app.use('/posts', postsRouter);
 
-// Path to client build depends on whether server is running
-//  from src or from dist/src folder. process.env.NODE_ENV is
-//  undefined, so check the file extension instead:
-//      ts - development
-//      js - production (compiled Typescript)
-let clientBuildPath = '../client/dist/';
-
-// if (__filename.split('.').pop() === 'js') {
-//     clientBuildPath = '../' + clientBuildPath;
-// }
+const clientBuildPath = '../client/dist/';
 
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 
