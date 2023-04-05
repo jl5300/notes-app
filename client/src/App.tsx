@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
-import NotFound from './pages/NotFound';
+import FileNotFound from './pages/FileNotFound';
 import SignUp from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -11,7 +11,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
-            <Route path='*' element={<NotFound />} />
+            <Route path='*' element={<FileNotFound />} />
         </Routes>
     );
 }
