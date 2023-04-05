@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - jlz-message-board
 on:
   push:
     branches:
-      - experimental-deployment
+      - main
   workflow_dispatch:
 
 jobs:

@@ -13,6 +13,11 @@ section {
     padding: 0rem 1rem;
 }
 
+.welcome-message a {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .credits {
     font-size: 0.8rem;
     padding: 0 0.2rem;

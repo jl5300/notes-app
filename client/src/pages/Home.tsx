@@ -46,19 +46,17 @@ export default function Home() {
         try {
             const res = await fetch(db.user);
             const currentUser = await res.json();
-
+            
             if (!res.ok) {
 				throw new Error(currentUser.message);
 			}
-
-            // Status if no user logged in is 204, so it won't
-            // be caught by the above conditional
-            if (res.status == 200) {
+            
+            if (currentUser) {
                 setUser(currentUser.username);
             }
         }
         catch (err: any) {
-            console.log(err.message);
+            console.log('No user logged in.');
         }
     }
 	
@@ -68,13 +66,17 @@ export default function Home() {
         fetchUser();
 	}, []);
 
+    // const handleLogoutClick = async () => {
+    //     await fetch('/logout', { method: 'DELETE' });
+    // };
+
 	return (
 		<div>
             <header>
                 <div className='welcome-message'>
                     {
                         user ?
-                        <p>Welcome {user}! <a href='/logout' onClick={() => setUser(null)}>Log Out</a></p> :
+                        <p>Welcome {user}! <a href='/logout'>Log Out</a></p> :
                         <a className='login-link' href='/login'>Log In</a>
                     }
                 </div>
