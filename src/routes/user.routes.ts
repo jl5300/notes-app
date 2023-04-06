@@ -5,11 +5,12 @@ import passport from 'passport';
 const router = Router();
 
 // Failureflash?
-router.post('/login', passport.authenticate('local'), (req, res) => {
-    res.redirect('/');
-});
+router.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login/failure'
+}));
 
-router.post('/logout', (req, res, next) => {
+router.get('/logout', (req, res, next) => {
     req.logout((err) => {
         if (err) {
             return next(err);

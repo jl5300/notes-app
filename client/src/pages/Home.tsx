@@ -66,10 +66,6 @@ export default function Home() {
         fetchUser();
 	}, []);
 
-    // const handleLogoutClick = async () => {
-    //     await fetch('/logout', { method: 'DELETE' });
-    // };
-
 	return (
 		<div>
             <header>

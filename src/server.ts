@@ -1,7 +1,6 @@
 // Third party dependencies
 import MongoStore from 'connect-mongo';
 import sessions from 'express-session';
-// import flash from 'express-flash';
 import mongoose from 'mongoose';
 import passport from 'passport';
 import express from 'express';
@@ -22,7 +21,7 @@ const app = express();
 (async () => {
 	try {
 		await mongoose.connect(config.db);
-        console.log('Connected to database successfully.')
+        console.log('Connected to database successfully.');
 	} catch (err: any) {
 		console.error(err.message || 'Error connecting to database.');
 		process.exit();
@@ -32,7 +31,7 @@ const app = express();
 app.use(sessions({
     store: MongoStore.create({
         mongoUrl: config.db,
-        ttl:24 * 60 * 60 * 1000,
+        ttl: 24 * 60 * 60 * 1000,
         autoRemove: 'interval',
         autoRemoveInterval: 10
     }),
@@ -41,7 +40,6 @@ app.use(sessions({
     saveUninitialized: false,
     resave: false
 }));
-// app.use(flash());
 
 // Authentication
 app.use(passport.session());
@@ -52,12 +50,10 @@ passport.deserializeUser(User.deserializeUser());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// TODO: Learn about flash messages
 app.use('/', userRouter);
 app.use('/posts', postsRouter);
 
 const clientBuildPath = '../client/dist/';
-
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 
 // For requests to unrecognized routes, defer to React app
