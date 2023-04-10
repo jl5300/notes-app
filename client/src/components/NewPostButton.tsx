@@ -1,4 +1,4 @@
-import { db } from '../config/app.config';
+import db from '../config/app.config';
 import './NewPostButton.css';
 import React from 'react';
 

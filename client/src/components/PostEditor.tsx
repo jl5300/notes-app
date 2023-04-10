@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { db } from '../config/app.config';
+import db from '../config/app.config';
 import Post from '../types/Post';
 import './PostEditor.css';
 

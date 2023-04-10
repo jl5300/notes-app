@@ -4,7 +4,6 @@ import passport from 'passport';
 
 const router = Router();
 
-// Failureflash?
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login/failure'
@@ -17,15 +16,14 @@ router.get('/logout', (req, res, next) => {
         }
     });
     res.redirect('/');
-})
+});
 
-router.post('/register', async (req, res) => {
+router.post('/register', async (req, res, next) => {
     await User.register(new User(
         {username: req.body.username}), req.body.password
     );
-
-    res.redirect('/');
-});
+    next();
+}, passport.authenticate('local', {successRedirect: '/'}));
 
 router.get('/user', (req, res) => {
     res.send(req.user);

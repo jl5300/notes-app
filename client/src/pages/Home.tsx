@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PostEditor from '../components/PostEditor';
 import PostsList from '../components/PostsList';
-import { db } from '../config/app.config';
+import db from '../config/app.config';
 import Post from '../types/Post';
 import './Home.css';
 
@@ -17,7 +17,7 @@ export default function Home() {
 	const [focusedPost, setFocusedPost] = useState<Post>(defaultPost);
 
 	const updatePosts = async (focusFirstPost=false, updateStatus=false) => {
-		setStatus('Getting posts from userbase...');
+		setStatus('Getting posts from database...');
 	
 		try {
 			const res = await fetch(db.posts);

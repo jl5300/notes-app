@@ -1,3 +1,11 @@
+/* body {
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
 form {
     display: flex;
     flex-direction: column;
@@ -5,15 +13,15 @@ form {
     align-items: center;
     max-width: 20rem;
     margin: auto;
-    background: #333;
+    background: #2c2c2c;
     border-radius: 3px;
     width: 50%;
     height: 70%;
-    color: blue;
+    color: #0074D9;
 }
 
 form a {
-    color: blue;
+    color: #0074D9;
 }
 
 .input {
@@ -21,9 +29,12 @@ form a {
 }
 
 input[type='text'], input[type='password'] {
-    display: block;
     margin: 0.4rem 0 1rem 0;
     width: 96%;
+    background-color: #323232;
+    outline-color: gainsboro;
+    caret-color: gainsboro;
+    color: gainsboro;
 }
 
 input[type='submit'] {
