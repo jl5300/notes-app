@@ -67,7 +67,7 @@ export default function Home() {
 	}, []);
 
 	return (
-		<div>
+		<>
             <header>
                 <div className='welcome-message'>
                     {
@@ -100,6 +100,6 @@ export default function Home() {
                     Icons8
                 </a>
 			</div>
-		</div>
+		</>
 	);
 }
