@@ -14,7 +14,13 @@ export default function LoginForm(props: any) {
             label = 'Sign Up';
             break;
 
-        case 'failure':
+        case 'registerFailed':
+            action = '/login';
+            label = 'Log In'
+            toast.error('A user already exists with that username. Try logging in.')
+            break;
+
+        case 'loginFailed':
             toast.error('User credentials invalid. Please try again.');
 
         default:

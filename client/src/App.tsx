@@ -9,8 +9,9 @@ function App() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login display='login' />} />
-            <Route path='/login/failure' element={<Login display='failure' />} />
+            <Route path='/login/failure' element={<Login display='loginFailed' />} />
             <Route path='/register' element={<Login display='register' />} />
+            <Route path='/register/failure' element={<Login display='registerFailed' />} />
             <Route path='*' element={<FileNotFound />} />
         </Routes>
     );

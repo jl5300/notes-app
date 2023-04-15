@@ -19,6 +19,10 @@ router.get('/logout', (req, res, next) => {
 });
 
 router.post('/register', async (req, res, next) => {
+    if (await User.findOne({ username: req.body.username })) {
+        return res.redirect('/register/failure');
+    }
+
     await User.register(new User(
         {username: req.body.username}), req.body.password
     );
