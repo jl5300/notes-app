@@ -23,7 +23,7 @@ export default function LoginForm(props: any) {
     }
 
     return(
-        <main>
+        <div className='login-container'>
             <ToastContainer
                 position='top-center'
                 hideProgressBar={true}
@@ -46,6 +46,6 @@ export default function LoginForm(props: any) {
                     <p>Don't have an account? <a href='/register'>Sign up</a>.</p>
                 }
             </form>
-        </main>
+        </div>
     );
 }
