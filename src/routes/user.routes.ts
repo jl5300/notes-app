@@ -23,8 +23,9 @@ router.post('/register', async (req, res, next) => {
         return res.redirect('/register/failure');
     }
 
-    await User.register(new User(
-        {username: req.body.username}), req.body.password
+    await User.register(new User({
+        username: req.body.username,
+    }), req.body.password
     );
     next();
 }, passport.authenticate('local', {successRedirect: '/'}));
