@@ -17,7 +17,7 @@ export default function Home() {
     const [user, setUser] = useState<string>('');
 	const [focusedPost, setFocusedPost] = useState<Post>(dummyPost);
 
-	const updatePosts = async (focusFirstPost=false, updateStatus=false) => {
+	const refreshPosts = async (focusFirstPost=false, updateStatus=false) => {
 		setStatus('Getting posts from database...');
 	
 		try {
@@ -63,7 +63,7 @@ export default function Home() {
 	
 	// Set up initial display on page load
 	useEffect(() => {
-		updatePosts(true, true);
+		refreshPosts(true, true);
         fetchUser();
 	}, []);
 
@@ -74,7 +74,9 @@ export default function Home() {
                     {
                         user ?
                         <p>Welcome {user}! <a href='/logout'>Log Out</a></p> :
-                        <a className='login-link' href='/login'>Log In</a>
+                        <div>
+                            <a className='login-link' href='/login'>Log in</a> to start posting.
+                        </div>
                     }
                 </div>
             </header>
@@ -82,7 +84,7 @@ export default function Home() {
 				<PostEditor
 					post={focusedPost}
 					setStatus={setStatus}
-					updatePosts={updatePosts}
+					refreshPosts={refreshPosts}
 				/>
 				<PostsList
                     user={user}
@@ -90,7 +92,7 @@ export default function Home() {
 					status={status}
 					setPosts={setPosts}
 					setStatus={setStatus}
-					updatePosts={updatePosts}
+					refreshPosts={refreshPosts}
 					focusedPost={focusedPost}
 					setFocusedPost={setFocusedPost}
 				/>

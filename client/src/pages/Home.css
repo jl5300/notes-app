@@ -9,6 +9,10 @@ section {
     border: 1px solid var(--dark-border);
 }
 
+.login-link {
+    color: #45caff;
+}
+
 .welcome-message {
     padding: 0rem 1rem;
 }

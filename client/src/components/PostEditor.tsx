@@ -43,7 +43,7 @@ export default function PostEditor(props: any) {
             return;
         }
     
-        props.updatePosts();
+        props.refreshPosts();
         setStatus('Saved post successfully.');
     }
 
@@ -68,7 +68,7 @@ export default function PostEditor(props: any) {
             return;
         }
     
-        props.updatePosts(true);
+        props.refreshPosts(true);
         setStatus('Deleted post successfully.');
     }
 
