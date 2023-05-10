@@ -34,7 +34,7 @@ export default function PostsList(props: any) {
                         {post.title}
                     </div>
                     <div className="content-preview">
-                        {post.content}
+                        {'@' + post.author}
                     </div>
                 </span>
                 <span className="timestamps">
@@ -58,6 +58,7 @@ export default function PostsList(props: any) {
                     setPosts={props.setPosts}
                 />
                 <NewPostButton
+                    user={props.user}
                     setStatus={props.setStatus}
                     updatePosts={props.updatePosts}
                     setFocusedPost={setFocusedPost}

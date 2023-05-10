@@ -5,16 +5,17 @@ import db from '../config/app.config';
 import Post from '../types/Post';
 import './Home.css';
 
-const defaultPost: Post = {
-	title: 'No posts',
-	content: 'Create one to get started.'
+const dummyPost: Post = {
+    title: 'No posts.',
+    content: 'Be the first to share with the world!',
+    author: ''
 };
 
 export default function Home() {
     const [posts, setPosts] = useState<Array<Post>>([]);
 	const [status, setStatus] = useState<string>('');
-    const [user, setUser] = useState<string | null>(null);
-	const [focusedPost, setFocusedPost] = useState<Post>(defaultPost);
+    const [user, setUser] = useState<string>('');
+	const [focusedPost, setFocusedPost] = useState<Post>(dummyPost);
 
 	const updatePosts = async (focusFirstPost=false, updateStatus=false) => {
 		setStatus('Getting posts from database...');
@@ -30,7 +31,7 @@ export default function Home() {
 			setPosts(data);
 
 			if (focusFirstPost) {
-				setFocusedPost(data.length ? data[0] : defaultPost);
+				setFocusedPost(data.length ? data[0] : dummyPost);
 			}
 		} catch (err: any) {
 			setStatus(err.message);
@@ -84,6 +85,7 @@ export default function Home() {
 					updatePosts={updatePosts}
 				/>
 				<PostsList
+                    user={user}
 					posts={posts}
 					status={status}
 					setPosts={setPosts}

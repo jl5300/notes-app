@@ -9,15 +9,16 @@ const notFound = (id: string): string => {
 // Create a new post
 router.post('/', async (req, res) => {
 	const post = new Post({
-		title: req.body.title || "Untitled Post",
-		content: req.body.content || "Empty post"
+		title: req.body.title || 'Untitled Post',
+		content: req.body.content || 'Empty post.',
+        author: req.body.author
 	});
 
 	try {
 		res.send(await post.save());
 	} catch(err: any) {
 		res.status(500).send({
-			message: err.message || "Error occurred while creating post."
+			message: err.message || 'Error occurred while creating post.'
 		});
 	}
 });
@@ -28,7 +29,7 @@ router.get('/', async (req, res) => {
 		res.send(await Post.find());
 	} catch(err: any) {
 		res.status(500).send({
-			message: err.message || "Error occurred while retrieving posts."
+			message: err.message || 'Error occurred while retrieving posts.'
 		});
 	}
 });
@@ -66,8 +67,8 @@ router.put('/:postId', async (req, res) => {
 
 	try {
 		const modifiedPost = await Post.findByIdAndUpdate(postId, {
-			title: req.body.title || "Untitled Post",
-			content: req.body.content || "Empty post"
+			title: req.body.title || 'Untitled Post',
+			content: req.body.content || 'Empty post'
 		}, { new: true });
 
 		if (!modifiedPost) {
@@ -101,7 +102,7 @@ router.delete('/:postId', async (req, res) => {
 			});
 		}
 
-		res.send({ message: "Post deleted successfully." })
+		res.send({ message: 'Post deleted successfully.' })
 	} catch(err: any) {
 		if (err.kind === 'ObjectId' || err.name === 'NotFound') {
 			return res.status(404).send({

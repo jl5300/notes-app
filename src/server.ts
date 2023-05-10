@@ -28,6 +28,9 @@ const app = express();
 	}
 })();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 app.use(sessions({
     store: MongoStore.create({
         mongoUrl: config.db,
@@ -46,9 +49,6 @@ app.use(passport.session());
 passport.use(User.createStrategy());
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
 app.use('/', userRouter);
 app.use('/posts', postsRouter);

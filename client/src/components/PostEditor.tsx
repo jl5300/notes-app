@@ -77,12 +77,12 @@ export default function PostEditor(props: any) {
             <textarea
                 className="focused-post-title"
                 onChange={(event) => setState({ ...state, title: event.target.value })}
-                value={state.title}
+                value={state.title || ''}
             />
             <textarea
                 className="focused-post-content"
                 onChange={(event) => setState({ ...state, content: event.target.value })}
-                value={state.content}
+                value={state.content || ''}
             />
             <div className="icons">
                 <span
