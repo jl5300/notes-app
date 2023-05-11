@@ -17,8 +17,8 @@ export default function Home() {
     const [user, setUser] = useState<string>('');
 	const [focusedPost, setFocusedPost] = useState<Post>(dummyPost);
 
-	const refreshPosts = async (focusFirstPost=false, updateStatus=false) => {
-		setStatus('Getting posts from database...');
+	const refreshPosts = async (focusFirstPost=false): Promise<void> => {
+		setStatus('Loading posts...');
 	
 		try {
 			const res = await fetch(db.posts);
@@ -34,12 +34,7 @@ export default function Home() {
 				setFocusedPost(data.length ? data[0] : dummyPost);
 			}
 		} catch (err: any) {
-			setStatus(err.message);
-			return;
-		}
-
-		if (updateStatus) {
-			setStatus('Updated posts successfully.');
+			throw new Error(err.message);
 		}
 	}
 
@@ -63,8 +58,16 @@ export default function Home() {
 	
 	// Set up initial display on page load
 	useEffect(() => {
-		refreshPosts(true, true);
         fetchUser();
+
+        try {
+            refreshPosts(true);
+        } catch (err: any) {
+            setStatus(err.message);
+            return;
+        }
+        
+        setStatus('Updated posts successfully.');
 	}, []);
 
 	return (
