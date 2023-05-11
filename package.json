@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npm run build && node dist/server.js",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts",
-    "build": "tsc && npm run client-build",
+    "build": "npm run tsc && npm run client-build",
+    "tsc": "tsc",
     "client-build": "cd client && npm install && npm run build",
     "postinstall": "npm run build",
     "test": "exit 0"
