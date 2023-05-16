@@ -25,25 +25,26 @@
     height: 61%;
 }
 
-.post-editor .icons {
+.post-editor .buttons {
     margin: 0rem 1rem 1rem 0rem;
     position: absolute;
     bottom: 0rem;
     right: 0rem;
     display: flex;
-    gap: 0.5rem;
+    gap: 1rem;
 }
 
-.post-editor .icons .material-symbols-outlined {
+.post-editor button {
+    border: none;
+    background: #363636;
+    color: whitesmoke;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-weight: 550;
+}
+
+.post-editor button:hover {
     cursor: pointer;
-    font-size: 3.5rem;
-    border-radius: 25%;
-}
-
-.post-editor .icons .material-symbols-outlined:hover {
-    background: #333;
-}
-
-.post-editor .icons .material-symbols-outlined:active {
-    background: rgb(66, 66, 66);
+    color: #45caff;
+    background: #2f2f2f;
 }

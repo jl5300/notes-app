@@ -85,7 +85,8 @@ export default function Home() {
             </header>
 			<main>
 				<PostEditor
-					post={focusedPost}
+                    user={user}
+					focusedPost={focusedPost}
 					setStatus={setStatus}
 					refreshPosts={refreshPosts}
 				/>
