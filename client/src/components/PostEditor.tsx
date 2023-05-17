@@ -11,7 +11,6 @@ export default function PostEditor(props: any) {
     // Using a ref to avoid useEffect firing on initial render
     // since state is already initialized to focusedPost
     const initialRender = useRef<boolean>(true);
-
     useEffect(() => {
         if (initialRender.current) {
             initialRender.current = false;
@@ -21,10 +20,6 @@ export default function PostEditor(props: any) {
     }, [focusedPost]);
 
     const handleSaveClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-        if (!focusedPost._id) {
-            return;
-        }
-        
         setStatus('Saving post to database...');
 
         try {
@@ -48,16 +43,12 @@ export default function PostEditor(props: any) {
     }
 
     const handleDeleteClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
-        if (!focusedPost._id) {
-            return;
-        }
-
         setStatus('Deleting post from database...');
 
         try {
-            const res = await fetch(`${db.posts}/${focusedPost._id}`, {
-                method: 'DELETE'
-            });
+            const res = await fetch(
+                `${db.posts}/${focusedPost._id}`, { method: 'DELETE' }
+            );
             const data = await res.json();
 
             if (!res.ok) {
@@ -72,21 +63,33 @@ export default function PostEditor(props: any) {
         setStatus('Deleted post successfully.');
     }
 
+    const postDisplay = props.user === focusedPost.author ? <>
+        <textarea
+            className='focused-post-title'
+            onChange={(event) => setState({ ...state, title: event.target.value })}
+            value={state.title}
+        />  
+        <textarea
+            className='focused-post-content'
+            onChange={(event) => setState({ ...state, content: event.target.value })}
+            value={state.content}
+        />
+    </> :
+    <>
+        <div className='focused-post-title'>
+            {state.title}
+        </div>
+        <div className='focused-post-content'>
+            {state.content}
+        </div>
+    </>
+
     return (
-        <section className="post-editor">
-            <textarea
-                className="focused-post-title"
-                onChange={(event) => setState({ ...state, title: event.target.value })}
-                value={state.title || ''}
-            />
-            <textarea
-                className="focused-post-content"
-                onChange={(event) => setState({ ...state, content: event.target.value })}
-                value={state.content || ''}
-            />
+        <section className='post-editor'>
+            {postDisplay}
             {
                 props.user === focusedPost.author ?
-                <div className="buttons">
+                <div className='buttons'>
                     <button onClick={handleSaveClick}>
                         Save
                     </button>

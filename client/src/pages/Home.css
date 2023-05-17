@@ -20,6 +20,7 @@ section {
 .welcome-message a {
     cursor: pointer;
     text-decoration: underline;
+    color: #45caff;
 }
 
 .credits {

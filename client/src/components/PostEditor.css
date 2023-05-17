@@ -3,7 +3,7 @@
     position: relative;
 }
 
-.post-editor textarea {
+.post-editor .focused-post-title, .post-editor .focused-post-content {
     color: var(--current-fg);
     background: none;
     border: none;
@@ -13,6 +13,7 @@
     padding: 1rem;
     box-sizing: border-box;
     overflow: auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .post-editor .focused-post-title {
