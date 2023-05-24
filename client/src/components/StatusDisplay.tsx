@@ -5,10 +5,6 @@ export default function StatusDisplay(props: any) {
     const setStatus = props.setStatus;
 
     const handleClick = async (event: React.MouseEvent<HTMLDivElement>) => {
-        if (!props.user) {
-            return;
-        }
-
         setStatus('Creating new post in database...');
 
         try {

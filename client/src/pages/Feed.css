@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: rgba(245, 245, 245, 0.9);
+}
+
+h1 {
+    margin-bottom: 0;
+}
+
+ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    max-width: 50%;
+    padding: 0;
+    gap: 2rem;
+}
+
+
+.post {
+    background: #141414;
+    padding: 1rem;
+    border-radius: 10px;
+    overflow-wrap: break-word;
+}
+
+.post .header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post .title {
+    margin: 0;
+}
+
+.post .material-symbols-outlined {
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.post .material-symbols-outlined:hover {
+    background: #343434;
+}
+
+.post .material-symbols-outlined:active {
+    background: #242424;
+}
+
+.post .header .material-symbols-outlined {
+    font-size: 2rem;
+    color: #cd7121;
+}
+
+.post .author {
+    margin: 0;
+    color: gray;
+}
+
+.post .content {
+    font-size: 1.2rem;
+    margin: 0.6rem 0;
+}
+
+.post .timestamp {
+    font-size: 0.8rem;
+    color: gray;
+    margin: 0;
+}
+
+.post .extras {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post .extras .material-symbols-outlined {
+    color: #45caff;
+    font-size: 2rem;
+}
+
+.credits {
+    font-size: 0.8rem;
+}
+
+.credits a {
+    color: gray;
+}
