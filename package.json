@@ -9,7 +9,7 @@
     "build": "npm run tsc && npm run client-setup",
     "tsc": "tsc",
     "client-setup": "npm run client-install && npm run client-build",
-    "client-install": "cd client && npm run install",
+    "client-install": "cd client && npm install",
     "client-build": "cd client && npm run build",
     "postinstall": "npm run build",
     "test": "exit 0"
