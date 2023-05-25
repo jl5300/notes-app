@@ -1,113 +1,164 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import parseTimestamp from '../utils/parseTimestamp';
 import PostEditor from '../components/PostEditor';
-import PostsList from '../components/PostsList';
+import NavBar from '../components/NavBar';
+import Modal from '../components/Modal';
 import db from '../config/app.config';
 import Post from '../types/Post';
+import axios from 'axios';
 import './Home.css';
 
-const dummyPost: Post = {
-    title: 'No posts.',
-    content: 'Be the first to share with the world!',
-    author: ''
-};
-
-export default function Home() {
-    const [posts, setPosts] = useState<Array<Post>>([]);
-	const [status, setStatus] = useState<string>('');
+export default function Home(props: any) {
     const [user, setUser] = useState<string>('');
-	const [focusedPost, setFocusedPost] = useState<Post>(dummyPost);
+    const [posts, setPosts] = useState<Post[]>([]);
+    const [isConfirmDeleteOpen, setConfirmDeleteOpen] = useState<Boolean>(false);
+    const [isEditPostOpen, setEditPostOpen] = useState<Boolean>(false);
+    const [activePost, setActivePost] = useState<Post>({title: '', content: '', author: ''});
 
-	const refreshPosts = async (focusFirstPost=false): Promise<void> => {
-		setStatus('Loading posts...');
-	
-		try {
-			const res = await fetch(db.posts);
-			const data = await res.json();
-			
-			if (!res.ok) {
-				throw new Error(data.message);
-			}
-			
-			setPosts(data);
+    // Fetch posts and current user on page load
+    useEffect(() => {
+        (async () => {
+            try {
+                await refreshPosts();
 
-			if (focusFirstPost) {
-				setFocusedPost(data.length ? data[0] : dummyPost);
-			}
-		} catch (err: any) {
-			throw new Error(err.message);
-		}
-	}
+                const res = await axios.get(db.user);
+                if (res.status !== 200) {
+                    throw new Error(res.data);
+                }
 
-    const fetchUser = async () => {
-        try {
-            const res = await fetch(db.user);
-            const currentUser = await res.json();
-            
-            if (!res.ok) {
-				throw new Error(currentUser.message);
-			}
-            
-            if (currentUser) {
-                setUser(currentUser.username);
+                if (res.data) {
+                    setUser(res.data.username);
+                }
+            } catch (err: any) {
+                console.log(err.message);
             }
-        }
-        catch (err: any) {
-            console.log('No user logged in.');
+        })();
+    }, []);
+
+    const refreshPosts = async (): Promise<void> => {
+        try {
+            const res = await axios.get(db.posts);
+            if (res.status !== 200) {
+                throw new Error(res.data);
+            }
+    
+            // Reverse list order because we want newest posts first
+            setPosts(res.data.reverse());
+        } catch (err: any) {
+            console.log(err.message);
         }
     }
-	
-	// Set up initial display on page load
-	useEffect(() => {
-        fetchUser();
 
+    const deleteActivePost = async (): Promise<void> => {
         try {
-            refreshPosts(true);
-        } catch (err: any) {
-            setStatus(err.message);
-            return;
-        }
-        
-        setStatus('Updated posts successfully.');
-	}, []);
+            const res = await axios.delete(`${db.posts}/${activePost._id}`);
 
-	return (
-		<>
-            <header>
-                <div className='welcome-message'>
+            if (res.status !== 200) {
+                throw new Error(res.data.message);
+            }
+
+            await refreshPosts();
+        } catch (err: any) {
+            console.log(err.message);
+        }
+    }
+
+    const postsList = posts.map((post) => {
+        const { date, time } = parseTimestamp(post.updatedAt);
+
+        const handleDeleteClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
+            setActivePost(post);
+            setConfirmDeleteOpen(true);
+        }
+
+        const handleEditClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
+            setActivePost(post);
+            setEditPostOpen(true);
+        }
+
+        return (
+            <li className='post' key={post._id}>
+                <div className='header'>
+                    <h2 className='title'>{post.title}</h2>
                     {
-                        user ?
-                        <p>Welcome {user}! <a href='/logout'>Log Out</a></p> :
-                        <div>
-                            <a className='login-link' href='/login'>Log in</a> to start posting.
-                        </div>
+                        user === post.author &&
+                        <span
+                            className='material-symbols-outlined'
+                            onClick={handleEditClick}
+                        >
+                            edit
+                        </span>
                     }
                 </div>
-            </header>
-			<main>
-				<PostEditor
-                    user={user}
-					focusedPost={focusedPost}
-					setStatus={setStatus}
-					refreshPosts={refreshPosts}
-				/>
-				<PostsList
-                    user={user}
-					posts={posts}
-					status={status}
-					setPosts={setPosts}
-					setStatus={setStatus}
-					refreshPosts={refreshPosts}
-					focusedPost={focusedPost}
-					setFocusedPost={setFocusedPost}
-				/>
-			</main>
-			<div className="credits">
+                <p className='author'>{'@' + post.author}</p>
+                <p className='content'>{post.content}</p>
+                <div className='extras'>
+                    <p className='timestamp'>{date} | {time}</p>
+                    {
+                        user === post.author &&
+                        <span
+                            className='material-symbols-outlined'
+                            onClick={handleDeleteClick}
+                        >
+                            delete
+                        </span>
+                    }
+                </div>
+            </li>
+        )
+    });
+
+    return (
+        <>
+            <NavBar user={user} setUser={setUser} />
+            <div className='container'>
+                <Modal
+                    title='Edit post'
+                    isOpen={isEditPostOpen}
+                    setOpen={setEditPostOpen}
+                >
+                    <PostEditor
+                        user={user}
+                        id={activePost._id}
+                        title={activePost.title}
+                        content={activePost.content}
+                        refreshPosts={refreshPosts}
+                        setModalOpen={setEditPostOpen}
+                    />
+                </Modal>
+                <Modal
+                    title='Are you sure you want to delete this post?'
+                    deletePost={deleteActivePost}
+                    isOpen={isConfirmDeleteOpen}
+                    setOpen={setConfirmDeleteOpen}
+                >
+                    It will be deleted forever.
+                </Modal>
+                <h1>News Feed</h1>
+                <ul>
+                    {
+                        user &&
+                        <PostEditor
+                            title=''
+                            content=''
+                            user={user}
+                            refreshPosts={refreshPosts}
+                        />
+                    }
+                    {
+                        postsList.length ?
+                        postsList :
+                        <p>No posts.</p>
+                    }
+                </ul>
+            </div>
+            <div className="credits">
 				<a target="_blank" rel="noopener noreferrer" href="https://icons8.com/icon/3mZCmvlo0TiW/post">
                     Note
                 </a> icon by <a target="_blank" rel="noopener noreferrer" href="https://icons8.com">
                     Icons8
                 </a>
 			</div>
-		</>
-	);
+        </>
+    );
 }

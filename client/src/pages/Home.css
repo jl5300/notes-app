@@ -1,68 +1,91 @@
-main {
+.container {
     display: flex;
-    height: 82vh;
-    gap: 12rem;
-    padding: 0 12rem 2.5rem 12rem;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 1rem;
+    color: rgba(245, 245, 245, 0.9);
 }
 
-section {
-    border: 1px solid var(--dark-border);
+h1 {
+    margin-bottom: 0;
 }
 
-.login-link {
-    color: #45caff;
+ul {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    max-width: 50%;
+    padding: 0;
+    gap: 2rem;
 }
 
-.welcome-message {
-    padding: 0rem 1rem;
+
+.post {
+    background: #141414;
+    padding: 1rem;
+    border-radius: 10px;
+    overflow-wrap: break-word;
 }
 
-.welcome-message a {
+.post .header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.post .title {
+    margin: 0;
+}
+
+.post .material-symbols-outlined {
     cursor: pointer;
-    text-decoration: underline;
+    border-radius: 5px;
+    height: fit-content;
+}
+
+.post .material-symbols-outlined:hover {
+    background: #343434;
+}
+
+.post .material-symbols-outlined:active {
+    background: #242424;
+}
+
+.post .header .material-symbols-outlined {
+    font-size: 2rem;
+    color: #cd7121;
+}
+
+.post .author {
+    margin: 0;
+    color: gray;
+}
+
+.post .content {
+    font-size: 1.2rem;
+    margin: 0.6rem 0;
+}
+
+.post .timestamp {
+    font-size: 0.8rem;
+    color: gray;
+    margin: 0;
+}
+
+.post .extras {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post .extras .material-symbols-outlined {
     color: #45caff;
+    font-size: 2rem;
 }
 
 .credits {
     font-size: 0.8rem;
-    padding: 0 0.2rem;
 }
 
-header {
-    display: flex;
-    align-items: center;
-    flex-direction: row-reverse;
-    height: 10vh;
-}
-
-a {
-    color: #aaa;
-}
-
-@media (prefers-color-scheme: light) {
-    :root {
-        --current-bg: var(--light-bg);
-        --current-fg: var(--light-fg);
-        --current-border: var(--light-border);
-    }
-
-    a {
-        color: #7FDBFF; 
-    }
-}
-
-@media (width < 1000px) {
-    main {
-        height: 88vh;
-        padding: 0.2rem 0;
-        gap: 0;
-    }
-    
-    header {
-        height: 8vh;
-    }
-    
-    .site-header {
-        padding: 0 0.2rem;
-    }
+.credits a {
+    color: gray;
 }
