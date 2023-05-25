@@ -39,6 +39,7 @@ ul {
 .post .material-symbols-outlined {
     cursor: pointer;
     border-radius: 5px;
+    height: fit-content;
 }
 
 .post .material-symbols-outlined:hover {
