@@ -8,7 +8,7 @@ import './App.css';
 function App() {
     return (
         <Routes>
-            <Route path='/' element={<Feed />} />
+            <Route path='/' element={<Home />} />
             <Route path='/login' element={<Login display='login' />} />
             <Route path='/login/failure' element={<Login display='loginFailed' />} />
             <Route path='/register' element={<Login display='register' />} />

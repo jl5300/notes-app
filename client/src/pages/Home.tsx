@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import PostEditor from '../components/PostEditor';
 import PostsList from '../components/PostsList';
 import db from '../config/app.config';
@@ -55,6 +55,15 @@ export default function Home() {
             console.log('No user logged in.');
         }
     }
+
+    const handleLogoutClick = async (event: React.MouseEvent<HTMLSpanElement>) => {
+        try {
+            await fetch(`${db.user}/logout`, {method: 'POST'});
+        } catch (err: any) {
+            console.log(err.message);
+        }
+        setUser('');
+    }
 	
 	// Set up initial display on page load
 	useEffect(() => {
@@ -76,7 +85,7 @@ export default function Home() {
                 <div className='welcome-message'>
                     {
                         user ?
-                        <p>Welcome {user}! <a href='/logout'>Log Out</a></p> :
+                        <p>Welcome {user}! <span onClick={handleLogoutClick}>Log Out</span></p> :
                         <div>
                             <a className='login-link' href='/login'>Log in</a> to start posting.
                         </div>

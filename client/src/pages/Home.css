@@ -17,7 +17,7 @@ section {
     padding: 0rem 1rem;
 }
 
-.welcome-message a {
+.welcome-message span {
     cursor: pointer;
     text-decoration: underline;
     color: #45caff;

@@ -10,15 +10,15 @@ form {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #242424;
+    background: #282828;
     border-radius: 5px;
     width: 20rem;
     height: 60%;
-    color: #45caff;
+    color: #0075dc;
 }
 
 form h1 {
-    margin-bottom: 0.5rem;
+    margin: 0.5rem;
 }
 
 form a {
@@ -39,7 +39,7 @@ input[type='text'], input[type='password'] {
 }
 
 input[type='submit'] {
-    background: linear-gradient(to bottom, #45caff, #0077de);
+    background: linear-gradient(to left, #4476E6, #8E54E9);
     margin-top: 0.6rem;
     border-radius: 3px;
     padding: 0.5rem 0;

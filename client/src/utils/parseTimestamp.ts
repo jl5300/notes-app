@@ -10,11 +10,9 @@ export default function parseTimestamp(timestamp: string | undefined) {
 
     return {
         date: parsedTimestamp.toLocaleDateString('en-us', {
-            // dateStyle: 'full',
-            weekday: 'short',
-            month: 'short',
+            month: 'numeric',
             day: 'numeric',
-            year: 'numeric'
+            year: '2-digit'
         }),
         time: parsedTimestamp.toLocaleTimeString('en-us', {
             hour: 'numeric',
