@@ -41,10 +41,10 @@ input[type='text'], input[type='password'] {
 input[type='submit'] {
     background: linear-gradient(to bottom, #45caff, #0077de);
     margin-top: 0.6rem;
-    border-radius: 3px;
+    border-radius: 30px;
     padding: 0.5rem 0;
     cursor: pointer;
     border: none;
-    width: 30%;
+    width: 27%;
     color: gainsboro;
 }
