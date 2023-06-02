@@ -10,13 +10,32 @@
 }
 
 .nav .material-symbols-outlined {
+    padding: 0 1rem;
     font-size: 2rem;
+    text-decoration: none;
     color: #45caff;
     cursor: pointer;
 }
 
-.nav a {
+.nav .material-symbols-outlined.active {
+    color: #cd7121;
+    text-decoration: underline;
+}
+
+.nav .link {
     color: #45caff;
+    text-decoration: none;
+    border: 1px solid #45caff;
+    border-radius: 35px;
+    cursor: pointer;
+    padding: 0.5rem;
+    margin: 1rem;
+    transition: 0.25s;
+}
+
+.nav .link:hover {
+    color: white;
+    background-color: #45caff;
 }
 
 .menu {
