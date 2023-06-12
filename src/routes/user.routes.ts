@@ -1,6 +1,7 @@
 import User from '../models/user.model';
 import { Router } from 'express';
 import passport from 'passport';
+import axios from 'axios';
 
 const router = Router();
 
@@ -23,8 +24,10 @@ router.post('/register', async (req, res, next) => {
         return res.redirect('/register/failure');
     }
 
+    const username = req.body.username;
     await User.register(new User({
-        username: req.body.username,
+        username: username,
+        avatar: (await axios.get(`https://api.dicebear.com/6.x/bottts/svg?seed=${username}`)).data,
     }), req.body.password
     );
     next();

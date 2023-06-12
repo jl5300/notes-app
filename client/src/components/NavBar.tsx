@@ -11,7 +11,7 @@ export default function NavBar(props: any) {
         } catch (err: any) {
             console.log(err.message);
         }
-        props.setUser('');
+        props.setUser(null);
     };
 
     return (

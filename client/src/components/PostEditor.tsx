@@ -11,6 +11,8 @@ export default function PostEditor(props: any) {
             let method = 'POST';
             let destination = db.posts;
 
+            console.log(props.user);
+
             if (props.id) {
                 method = 'PUT';
                 destination += `/${props.id}`
@@ -20,7 +22,7 @@ export default function PostEditor(props: any) {
                 method: method,
                 headers: {
                     'Accept': 'application/json',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     title: newPost.title,

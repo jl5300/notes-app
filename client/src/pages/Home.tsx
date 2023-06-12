@@ -1,19 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import parseTimestamp from '../utils/parseTimestamp';
 import PostEditor from '../components/PostEditor';
 import NavBar from '../components/NavBar';
 import Modal from '../components/Modal';
 import db from '../config/app.config';
+import User from '../types/User';
 import Post from '../types/Post';
 import axios from 'axios';
 import './Home.css';
 
 export default function Home(props: any) {
-    const [user, setUser] = useState<string>('');
+    const [user, setUser] = useState<User | null>(null);
     const [posts, setPosts] = useState<Post[]>([]);
     const [isConfirmDeleteOpen, setConfirmDeleteOpen] = useState<Boolean>(false);
     const [isEditPostOpen, setEditPostOpen] = useState<Boolean>(false);
-    const [activePost, setActivePost] = useState<Post>({title: '', content: '', author: ''});
+    const [activePost, setActivePost] = useState<Post>({
+        title: '', content: '', author: {username: '', avatar: '', _id: ''}
+    });
 
     // Fetch posts and current user on page load
     useEffect(() => {
@@ -27,7 +30,7 @@ export default function Home(props: any) {
                 }
 
                 if (res.data) {
-                    setUser(res.data.username);
+                    setUser(res.data);
                 }
             } catch (err: any) {
                 console.log(err.message);
@@ -79,29 +82,40 @@ export default function Home(props: any) {
         return (
             <li className='post' key={post._id}>
                 <div className='header'>
-                    <h2 className='title'>{post.title}</h2>
+                    <span className='top-left'>
+                        <span className='avatar'>
+                            <div dangerouslySetInnerHTML={{ __html: post.author.avatar }} />
+                        </span>
+                        <span className='text'>
+                            <h2 className='title'>{post.title}</h2>
+                            <p className='username'>{'@' + post.author.username}</p>
+                        </span>
+                    </span>
                     {
-                        user === post.author &&
+                    // user && (
+                        // user.username === post.author.username &&
                         <span
                             className='material-symbols-outlined'
                             onClick={handleEditClick}
                         >
                             edit
                         </span>
+                        // )
                     }
                 </div>
-                <p className='author'>{'@' + post.author}</p>
                 <p className='content'>{post.content}</p>
                 <div className='extras'>
                     <p className='timestamp'>{date} | {time}</p>
                     {
-                        user === post.author &&
+                    // user && (
+                        // user.username === post.author.username &&
                         <span
                             className='material-symbols-outlined'
                             onClick={handleDeleteClick}
                         >
                             delete
                         </span>
+                        // )
                     }
                 </div>
             </li>

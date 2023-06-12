@@ -1,5 +1,6 @@
+import Post, { IPost } from '../models/post.model';
+import User from '../models/user.model';
 import { Router } from 'express';
-import Post from '../models/post.model';
 
 const router = Router();
 const notFound = (id: string): string => {
@@ -8,10 +9,15 @@ const notFound = (id: string): string => {
 
 // Create a new post
 router.post('/', async (req, res) => {
+    const author = req.body.author;
 	const post = new Post({
-		title: req.body.title || 'Untitled Post',
-		content: req.body.content || 'Empty post.',
-        author: req.body.author
+		title: req.body.title,
+		content: req.body.content,
+        author: {
+            _id: author.id,
+            username: author.username,
+            avatar: author.avatar
+        }
 	});
 
 	try {
@@ -23,10 +29,11 @@ router.post('/', async (req, res) => {
 	}
 });
 
+
 // Retrieve all posts
 router.get('/', async (req, res) => {
 	try {
-		res.send(await Post.find());
+        res.send(await Post.find());
 	} catch(err: any) {
 		res.status(500).send({
 			message: err.message || 'Error occurred while retrieving posts.'

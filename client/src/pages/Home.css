@@ -30,18 +30,43 @@ ul {
 
 .post .header {
     display: flex;
-    justify-content: space-between;
+    align-content: space-between;
 }
 
-.post .title {
+.post .header .top-left {
+    flex: 5;
+    display: flex;
+    align-items: center;
+}
+
+.post .header .material-symbols-outlined {
+    flex: 0;
+}
+
+.post .header .top-left .avatar {
+    flex: 1;
+    margin-right: 0.5rem;
+}
+
+.post .header .top-left .text {
+    flex: 8;
+}
+
+.post .header .top-left .title {
     margin: 0;
 }
 
+.post .header .top-left .username {
+    margin: 0;
+    color: gray;
+}
+
 .post .material-symbols-outlined {
+    flex: 1;
     cursor: pointer;
     border-radius: 5px;
     height: fit-content;
-}
+}    
 
 .post .material-symbols-outlined:hover {
     background: #343434;
@@ -56,14 +81,9 @@ ul {
     color: #cd7121;
 }
 
-.post .author {
-    margin: 0;
-    color: gray;
-}
-
 .post .content {
     font-size: 1.2rem;
-    margin: 0.6rem 0;
+    margin: 0.6rem 0 0 0;
 }
 
 .post .timestamp {
@@ -74,17 +94,20 @@ ul {
 
 .post .extras {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
 }
 
 .post .extras .material-symbols-outlined {
     color: #45caff;
     font-size: 2rem;
+    flex: 0;
 }
 
 .credits {
     font-size: 0.8rem;
+    position: static;
+    bottom: 0;
 }
 
 .credits a {
