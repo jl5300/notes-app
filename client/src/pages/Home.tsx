@@ -91,31 +91,29 @@ export default function Home(props: any) {
                             <p className='username'>{'@' + post.author.username}</p>
                         </span>
                     </span>
-                    {
-                    // user && (
-                        // user.username === post.author.username &&
+                    {user && (
+                        user.username === post.author.username &&
                         <span
                             className='material-symbols-outlined'
                             onClick={handleEditClick}
                         >
                             edit
                         </span>
-                        // )
+                        )
                     }
                 </div>
                 <p className='content'>{post.content}</p>
                 <div className='extras'>
                     <p className='timestamp'>{date} | {time}</p>
-                    {
-                    // user && (
-                        // user.username === post.author.username &&
+                    {user && (
+                        user.username === post.author.username &&
                         <span
                             className='material-symbols-outlined'
                             onClick={handleDeleteClick}
                         >
                             delete
                         </span>
-                        // )
+                        )
                     }
                 </div>
             </li>
