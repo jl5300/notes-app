@@ -1,7 +1,5 @@
 # Message Board
 
-Currently working on adding user authentication. In the meantime, posts are editable by all users.
-
 ### Frontend:
 
 React + Typescript Vite app.
