@@ -11,8 +11,6 @@ export default function PostEditor(props: any) {
             let method = 'POST';
             let destination = db.posts;
 
-            console.log(props.user);
-
             if (props.id) {
                 method = 'PUT';
                 destination += `/${props.id}`
