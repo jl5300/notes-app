@@ -15,7 +15,7 @@ export default function Home(props: any) {
     const [isConfirmDeleteOpen, setConfirmDeleteOpen] = useState<Boolean>(false);
     const [isEditPostOpen, setEditPostOpen] = useState<Boolean>(false);
     const [activePost, setActivePost] = useState<Post>({
-        title: '', content: '', author: {username: '', avatar: '', _id: ''}
+        title: '', content: '', author: {username: '', profilePicture: null, _id: ''}
     });
 
     // Fetch posts and current user on page load
@@ -79,12 +79,18 @@ export default function Home(props: any) {
             setEditPostOpen(true);
         }
 
+        const profilePictureUrl = post.author.profilePicture ?
+            post.author.profilePicture :
+            '/default-profile.png';
+
+        console.log(post.author.profilePicture);
+
         return (
             <li className='post' key={post._id}>
                 <div className='header'>
                     <span className='top-left'>
-                        <span className='avatar'>
-                            <div dangerouslySetInnerHTML={{ __html: post.author.avatar }} />
+                        <span className='profile-picture'>
+                            <img src={profilePictureUrl} alt='Profile Picture' />
                         </span>
                         <span className='text'>
                             <h2 className='title'>{post.title}</h2>

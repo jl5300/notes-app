@@ -46,9 +46,16 @@ export default function LoginForm(props: any) {
                     <label htmlFor='password'>Password</label>
                     <input type='password' name='password' id='password' />
                 </div>
+                {/* {
+                    display === 'register' &&
+                    <div className='input'>
+                        <label htmlFor='confirm-password'>Confirm Password</label>
+                        <input type='password' name='confirm-password' id='confirm-password' />
+                    </div>
+                } */}
                 <input type='submit' value={label} />
                 {
-                    display === 'register' ? null :
+                    display !== 'register' &&
                     <p>Don't have an account? <a href='/register'>Sign up</a>.</p>
                 }
             </form>

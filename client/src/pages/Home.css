@@ -43,9 +43,14 @@ ul {
     flex: 0;
 }
 
-.post .header .top-left .avatar {
+.post .header .top-left .profile-picture {
     flex: 1;
     margin-right: 0.5rem;
+}
+
+.post .header .top-left .profile-picture img {
+    height: 100%;
+    width: 100%;
 }
 
 .post .header .top-left .text {

@@ -1,9 +1,21 @@
 import User from '../models/user.model';
 import { Router } from 'express';
 import passport from 'passport';
-import axios from 'axios';
+import multer from 'multer';
+import path from 'path';
 
 const router = Router();
+
+// Set up file storage for profile pictures
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname, '../../uploads'));
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname);
+    }
+});
+const upload = multer({ storage });
 
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
@@ -27,12 +39,33 @@ router.post('/register', async (req, res, next) => {
     const username = req.body.username;
     await User.register(new User({
         username: username,
-        avatar: (await axios.get(`https://api.dicebear.com/6.x/bottts/svg?seed=${username}`)).data,
+        profilePicture: null
     }), req.body.password
     );
     next();
 }, passport.authenticate('local', {successRedirect: '/'}));
 
+router.post('/uploadProfilePicture', upload.single('profilePicture'), async (req, res) => {
+    try {
+        // @ts-ignore
+        let user = await User.findById(req.user._id);
+        
+        user.profilePicture = req.file.path;
+        await user.save();
+
+        // @ts-ignore
+        user = await User.findById(req.user._id);
+        console.log(user);
+
+        res.send({ message: 'Profile picture uploaded successfully.' });
+    } catch (err: any) {
+        console.error(err);
+        res.status(500).send({ message: err.message || 'Failed to upload profile picture.' });
+    }
+});
+
+// Convenience for getting the current user client-side
+// There's probably a better way to do this
 router.get('/user', (req, res) => {
     res.send(req.user);
 });

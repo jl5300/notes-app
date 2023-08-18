@@ -7,7 +7,7 @@ import express from 'express';
 import path from 'path';
 
 // Local dependencies
-import postsRouter from './routes/post.routes';
+import postRouter from './routes/post.routes';
 import userRouter from './routes/user.routes';
 import config from './config/server.config';
 import User from './models/user.model';
@@ -51,9 +51,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use('/', userRouter);
-app.use('/posts', postsRouter);
+app.use('/posts', postRouter);
 
 const clientBuildPath = '../client/dist/';
+app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(express.static(path.join(__dirname, clientBuildPath)));
 
 // For requests to unrecognized routes, defer to React app

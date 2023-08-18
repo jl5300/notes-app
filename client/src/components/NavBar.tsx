@@ -4,7 +4,6 @@ import axios from 'axios';
 import './NavBar.css';
 
 export default function NavBar(props: any) {
-
     const handleLogoutClick = async () => {
         try {
             await axios.post(`${db.user}/logout`);
@@ -20,9 +19,14 @@ export default function NavBar(props: any) {
                 <NavLink to='/' className='material-symbols-outlined' title='Home'>
                     home
                 </NavLink>
-                <NavLink to='profile' className='material-symbols-outlined' title='Profile'>
-                    account_circle
-                </NavLink>
+                {
+                    props.user && (
+                        <NavLink to='profile' className='material-symbols-outlined' title='Profile'>
+                            account_circle
+                        </NavLink>
+                    )
+                }
+
             </span>
             {
                 props.user ?

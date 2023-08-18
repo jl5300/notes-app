@@ -4,17 +4,16 @@ import { IUser } from './user.model';
 interface IPost {
     title: string;
     content: string;
-    author: IUser
+    authorId: Types.ObjectId;
+    author: null | IUser;
 };
 
 const PostSchema = new mongoose.Schema<IPost>({
 	title: String,
 	content: String,
-    author: {
-        _id: Types.ObjectId,
-        username: String,
-        avatar: String
-    }
+    authorId: Types.ObjectId,
+    author: null || Object
+    ,
 }, {
 	timestamps: true,
 });

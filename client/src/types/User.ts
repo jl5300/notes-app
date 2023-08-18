@@ -1,5 +1,5 @@
 export default interface User {
     username: string;
-    avatar: string;
+    profilePicture: null | string;
     _id: string;
 }
